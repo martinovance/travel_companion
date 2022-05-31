@@ -10,7 +10,7 @@ import Map from './components/Map/Map';
 const App = () => {
     const [places, setPlaces] = useState([]);
     const [weatherData, setWeatherData] = useState([]);
-    const [filteredPlaces, setFilteredPlaces] = useState=([]);
+    const [filteredPlaces, setFilteredPlaces] = useState([]);
 
     const [childClicked, setChildClicked] = useState(null);
     const [autoComplete, setAutoComplete] = useState(null);
@@ -45,6 +45,7 @@ const App = () => {
             .then((data) => {
                 setPlaces(data.filter((place) => place.name && place.num_reviews > 0 ));
                 setFilteredPlaces([]);
+                setRating('');
                 setIsLoading(false);
             });
         }
