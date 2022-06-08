@@ -19,7 +19,7 @@ const App = () => {
     const [coordinates, setCoordinates] = useState({});
     const [bounds, setBounds] = useState({});
 
-    const [type, setType] = useState('restaurants');
+    const [type, setType] = useState('hotels');
     const [rating, setRating] = useState('');
 
     useEffect(() => {
@@ -32,7 +32,7 @@ const App = () => {
         const filtered = places.filter((place) => Number(place.rating) > rating);
 
         setFilteredPlaces(filtered);
-    }, [rating]);
+    }, [rating, places]);
 
     useEffect(() => {
         if(bounds.sw && bounds.ne) {
@@ -43,13 +43,13 @@ const App = () => {
 
         getPlacesData(type, bounds.sw, bounds.ne)
             .then((data) => {
-                setPlaces(data.filter((place) => place.name && place.num_reviews > 0 ));
+                setPlaces(data?.filter((place) => place.name && place.num_reviews > 0 ));
                 setFilteredPlaces([]);
                 setRating('');
                 setIsLoading(false);
             });
         }
-    }, [type, bounds]);
+    }, [type, bounds, coordinates.lat, coordinates.lng]);
 
     const onLoad = (autoC) => setAutoComplete(autoC);
 
@@ -73,7 +73,7 @@ const App = () => {
                         type={type}
                         setType={setType}
                         rating={rating}
-                        seRating={setRating}
+                        setRating={setRating}
                     />
                 </Grid>
                 <Grid item xs={12} md={8} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

@@ -32,7 +32,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked, 
             className={classes.markerContainer}
             lat={Number(place.latitude)}
             lng={Number(place.longitude)}
-            key={1}
+            key={i}
           >
             {
               !isDesktop ? (
@@ -55,7 +55,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked, 
         ))}
         {weatherData?.list?.length && weatherData.list.map((data, i) => (
           <div key={i} lat={data.coord.lat} lng={data.coord.lon}>
-            <img height={100} src={`https://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt={data.weather} />
+            <img height={100} src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt={data.weather} />
           </div>
         ))}
 
